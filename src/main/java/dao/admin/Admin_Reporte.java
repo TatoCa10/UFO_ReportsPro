@@ -147,6 +147,10 @@ public class Admin_Reporte {
                 i++;
                 }
             
+            if (fecha==null) {
+                fecha="2015-05-11";
+            }
+            
             return fecha;
 
             }
