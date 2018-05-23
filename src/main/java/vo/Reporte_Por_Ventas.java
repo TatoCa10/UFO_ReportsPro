@@ -15,7 +15,7 @@ public class Reporte_Por_Ventas {
     
     private Cancion cancion;
     private int ventas;
-    private Date fecha;
+    private java.sql.Date fecha;
 
     public Cancion getCancion() {
         return cancion;
@@ -33,13 +33,15 @@ public class Reporte_Por_Ventas {
         this.ventas = ventas;
     }
 
-    public Date getFecha() {
+    public java.sql.Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(java.sql.Date fecha) {
         this.fecha = fecha;
     }
+
+    
     
     
     

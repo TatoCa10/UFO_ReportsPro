@@ -36,7 +36,7 @@ public class Admin_Reporte_Por_Ventas {
         boolean resultado = false;
         try {
             //1.Establecer la consulta
-            String consulta = "INSERT INTO Reporte_ventas VALUES(?,?,?,?)";
+            String consulta = "INSERT INTO Reporte_ventas VALUES(?,?,?,?,?,?)";
             //2. Crear el PreparedStament
             PreparedStatement statement
                     = this.conexion.prepareStatement(consulta);

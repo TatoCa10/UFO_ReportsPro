@@ -7,6 +7,7 @@ package controlador;
 
 import dao.admin.Admin_Reporte_Por_Ventas;
 import dao.admin.Admin_Reporte_Ventas_Album;
+import dao.admin.Fecha;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -74,7 +75,7 @@ public class Servlet_Registrar_Ventas extends HttpServlet {
         //processRequest(request, response);
         response.setContentType("application/json");
 
-        int opcion = Integer.parseInt(request.getParameter("opcion"));
+       // int opcion = Integer.parseInt(request.getParameter("opcion"));
         String name = request.getParameter("name");
         String ID = request.getParameter("ID");
         String tipo = request.getParameter("tipo");
@@ -86,20 +87,27 @@ public class Servlet_Registrar_Ventas extends HttpServlet {
         Reporte_Ventas_Album reporteporVentasAlbum = new Reporte_Ventas_Album();
         Cancion cancion = new Cancion();
         Album album = new Album();
-        Date now = new Date(System.currentTimeMillis());
-        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+                Fecha now = new Fecha();
         
-        opcion = 1;
+        
+        int opcion = 1;
         switch (opcion) {
             case 1:
                 cancion= new Cancion();
 
+                album.setTitulo("Vacio");
+                album.setId("Vacio");
                 cancion.setNombre(name);
                 cancion.setId(ID);
+                cancion.setAlbum(album);
 
                 reportePorVentas.setCancion(cancion);
                 reportePorVentas.setVentas(Integer.parseInt(ventas));
-                reportePorVentas.setFecha(now);
+                
+                reportePorVentas.setFecha(now.obtenerFecha());
+                
+                System.out.println(now.obtenerFecha());
+                System.out.println(ventas);
 
                 if (tipo.equals("1")) {
 
@@ -177,14 +185,14 @@ public class Servlet_Registrar_Ventas extends HttpServlet {
 
                 reporteporVentasAlbum.setAlbum(album);
                 reportePorVentas.setVentas(Integer.parseInt(ventas));
-                reportePorVentas.setFecha(now);
+                reportePorVentas.setFecha(now.obtenerFecha());
 
                 
                 if (tipo.equals("1")) {
 
                     if (adminReporteVentasAlbum.crearReportePorVentasAlbum(reporteporVentasAlbum)) {
 
-                        String Full = "Se ha registrado una venta para la cancion " + name + " con el ID " + ID + "TIPO-> " + tipo;
+                        String Full = "Se ha registrado una venta para el album " + name + " con el ID " + ID + "TIPO-> " + tipo;
 
                         JSONObject json = new JSONObject();
                         System.out.println("JSON Enviado");
@@ -197,7 +205,7 @@ public class Servlet_Registrar_Ventas extends HttpServlet {
                         out.print(json);
                     } else {
 
-                        String Full = "Error registrando venta de cancion";
+                        String Full = "Error registrando venta de album";
                         JSONObject json = new JSONObject();
                         System.out.println("JSON Enviado");
                         try {
