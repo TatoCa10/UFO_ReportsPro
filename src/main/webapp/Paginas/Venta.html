@@ -1,0 +1,260 @@
+<html>
+    <head>
+        <title>Ventas Sencillo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../Style/MainStyle.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="../Ajax/Ajax_Registrar_Ventas.js"></script>
+
+        <style>
+            body{
+                font-family: "Source Sans Pro";
+                background-color: #cccccc;
+                background-image: url("../Imagenes/fon7.jpg");
+            }
+
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                padding: 12px 16px;
+                z-index: 1;
+                color: #000000;
+                margin-left: 20px;
+                margin-top: 15px;
+                margin-bottom: 20px;
+            }
+            span{
+                margin: 0;
+                padding: 0;
+                border: 0;
+                font-size: 100%;
+                font: inherit;
+                vertical-align: baseline;
+            }
+            .Cajas{
+                border-style: solid; 
+                width: 230px; 
+                height: 150px; 
+                float: left;
+                margin-left: 25px;
+                border-color: #ccc;
+                border-radius: 5px;
+                color: #ccc;  
+                margin-bottom: 150px;
+            }
+            #Simple{
+                margin-top: 30px;
+            }
+
+            #form {
+                position: relative;
+                width: 500px;
+                margin: 50px auto 10px auto;
+            }
+
+            input {
+                font-family: "Source Sans Pro";
+                font-size: 0.875em;
+                width: 470px;
+                height: 50px;
+                padding: 0px 15px 0px 15px;
+
+                background: transparent;
+                outline: none;
+                color: #000000;
+
+                border: solid 1px #cccccc;
+                border-bottom: none;
+
+                transition: all 0.3s ease-in-out;
+                -webkit-transition: all 0.3s ease-in-out;
+                -moz-transition: all 0.3s ease-in-out;
+                -ms-transition: all 0.3s ease-in-out;
+            }
+
+            input:hover {
+                background: #b3aca7;
+                color: #ffffff;
+            }
+
+            textarea {
+                width: 470px;
+                max-width: 470px;
+                height: 110px;
+                max-height: 110px;
+                padding: 15px;
+
+                background: transparent;
+                outline: none;
+
+                color: #cccccc;
+                font-size: 0.875em;
+
+                border: solid 1px #cccccc;
+
+                transition: all 0.3s ease-in-out;
+                -webkit-transition: all 0.3s ease-in-out;
+                -moz-transition: all 0.3s ease-in-out;
+                -ms-transition: all 0.3s ease-in-out;
+            }
+
+            textarea:hover {
+                background: #b3aca7;
+                color: #e2dedb;
+            }
+
+            #submit {
+                width: 470px;
+
+                padding: 0;
+                margin: -2px 0px 0px 0px;
+
+                font-size: 0.875em;
+                color: #000000;
+
+                outline:none;
+                cursor: pointer;
+
+                border: solid 1px #cccccc;
+                border-top: none;
+            }
+
+            #submit:hover {
+                background-color: #009966;
+            }
+
+            a{
+                color: #009966;
+            }
+            a:link {
+                text-decoration: none;
+            }
+
+            a:visited {
+                text-decoration: none;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+            a:active {
+                text-decoration: underline;
+            }
+
+            .boton{
+                font-family: "Source Sans Pro";
+                font-size: 0.875em;
+                width: 470px;
+                height: 50px;
+                padding: 0px 15px 0px 15px;
+
+                background: transparent;
+                outline: none;
+                color: #000000;
+
+                border: solid 1px #cccccc;
+
+                transition: all 0.3s ease-in-out;
+                -webkit-transition: all 0.3s ease-in-out;
+                -moz-transition: all 0.3s ease-in-out;
+                -ms-transition: all 0.3s ease-in-out;
+            }
+            .boton:hover{
+                background: #009966;
+                color: #ffffff;
+            }
+
+        </style>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            var num1 = 1;
+
+            $(document).ready(function () {
+
+                $("#hole1").click(function () {
+                    $("#slot1").slideToggle("slow");
+                    ;
+                    $("#Caja_Simple").slideToggle("slow");
+                });
+            });
+
+
+            $(document).ready(function () {
+                $("#hole2").click(function () {
+                    $("#slot2").slideToggle("slow");
+                    $("#Caja_Masiva").slideToggle("slow");
+                });
+            });
+
+        </script>
+    </head>
+
+    <body>
+
+    <center>
+        <div id="Simple">
+            <p style="font-size: 35px; color: #cccccc">Registro Ventas</p>
+        </div>
+    </center>
+
+    <center>
+        <div style="width: 550px; padding: 5px; margin-top: 10%; margin-left: 2%; margin-bottom: 300px">
+
+            <div class="Cajas" id="hole1"><p style="padding-top: 25px;" id="Caja_Simple"> <i class="far fa-star fa-3x"></i><br> Simple</p>
+                <div class="dropdown-content" id="slot1">
+                    <form id="form" class="topBefore">
+                        <p style="font-size: 25px; color: #000000">Venta Simple</p>
+                        <input id="name" type="text" placeholder="Nombre Cancion">
+                        <input id="ID" type="text" placeholder="ID Cancion" style="border-bottom-style: solid; border-color: #cccccc; border-width: 1px">
+                    </form>
+
+                    <div id="form" style="margin-top: 10px; margin-bottom: 100px">
+                        <button id="enviar" class="boton"> REGISTRAR </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="Cajas" id="hole2"><p style="padding-top: 25px;" id="Caja_Masiva"> <i class="fas fa-star fa-3x"></i><br> Masiva</p>
+                <div class="dropdown-content"  id="slot2">
+
+                    <form id="form" class="topBefore">
+                        <p style="font-size: 25px; color: #000000">Venta Masiva</p>
+                        <input id="name2" type="text" placeholder="Nombre Cancion">
+                        <input id="ID2" type="text" placeholder="ID Cancion">
+                        <input id="ventas" type="text" placeholder="Numero Ventas" style="border-bottom-style: solid; border-color: #cccccc; border-width: 1px">
+                    </form>
+
+                    <div id="form" style="margin-top: 10px; margin-bottom: 100px">
+                        <button id="enviar2" class="boton"> REGISTRAR </button>
+                    </div>
+                </div>
+            </div>
+    </center>
+
+    <center>
+        <div id="Llegada" style="color: #cccccc;"></div>
+    </center>
+
+    <center>
+        <div id="Simple">
+            <p style="font-size: 15px;"><a href="../index.html">Volver Al Menu</a></p>
+        </div>
+    </center>
+
+</body>
+
+
+</html>

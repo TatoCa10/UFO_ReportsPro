@@ -1,0 +1,172 @@
+<html>
+    <head>
+        <title>Registro Cancion</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../Style/MainStyle.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="../Ajax/Ajax_Registrar_Cancion.js"></script>
+
+
+        <style>
+            body{
+                font-family: "Source Sans Pro";
+                background-color: #cccccc;
+                background-image: url("../Imagenes/fon7.jpg");
+            }
+            a{
+                color: #009966;
+            }
+            header {
+                position: relative;
+                margin: 60px 0 25px 0;
+                font-size: 2.3em;
+                text-align: center;
+                color: #cccccc;
+            }
+
+            #form {
+                position: relative;
+                width: 500px;
+                margin: 50px auto 100px auto;
+            }
+
+            input {
+                font-family: "Source Sans Pro";
+                font-size: 0.875em;
+                width: 470px;
+                height: 50px;
+                padding: 0px 15px 0px 15px;
+
+                background: transparent;
+                outline: none;
+                color: #cccccc;
+
+                border: solid 1px #cccccc;
+                border-bottom: none;
+
+                transition: all 0.3s ease-in-out;
+                -webkit-transition: all 0.3s ease-in-out;
+                -moz-transition: all 0.3s ease-in-out;
+                -ms-transition: all 0.3s ease-in-out;
+            }
+
+            input:hover {
+                background: #b3aca7;
+                color: #ffffff;
+            }
+
+            textarea {
+                width: 470px;
+                max-width: 470px;
+                height: 110px;
+                max-height: 110px;
+                padding: 15px;
+
+                background: transparent;
+                outline: none;
+
+                color: #cccccc;
+                font-size: 0.875em;
+
+                border: solid 1px #cccccc;
+
+                transition: all 0.3s ease-in-out;
+                -webkit-transition: all 0.3s ease-in-out;
+                -moz-transition: all 0.3s ease-in-out;
+                -ms-transition: all 0.3s ease-in-out;
+            }
+
+            textarea:hover {
+                background: #b3aca7;
+                color: #e2dedb;
+            }
+
+            #submit {
+                width: 470px;
+
+                padding: 0;
+                margin: -2px 0px 0px 0px;
+
+                font-size: 0.875em;
+                color: #cccccc;
+
+                outline:none;
+                cursor: pointer;
+
+                border: solid 1px #cccccc;
+                border-top: none;
+            }
+
+            #submit:hover {
+                background-color: #009966;
+            }
+
+            .boton{
+                font-family: "Source Sans Pro";
+                font-size: 0.875em;
+                width: 470px;
+                height: 50px;
+                padding: 0px 15px 0px 15px;
+
+                background: transparent;
+                outline: none;
+                color: #cccccc;
+
+                border: solid 1px #cccccc;
+
+                transition: all 0.3s ease-in-out;
+                -webkit-transition: all 0.3s ease-in-out;
+                -moz-transition: all 0.3s ease-in-out;
+                -ms-transition: all 0.3s ease-in-out;
+            }
+            .boton:hover{
+                background: #b3aca7;
+                color: #ffffff;
+            }
+
+
+        </style>
+    </head>
+
+    <body>
+        <header>Registrar Cancion</header>
+
+        <form id="form" class="topBefore">
+
+            <input id="ID" type="text" placeholder="ID">
+            <input id="nombre" type="text" placeholder="Nombre">
+            <input id="interprete" type="text" placeholder="Interprete">
+            <input id="ventas" type="text" placeholder="Ventas" style="border-bottom-style: solid; border-color: #cccccc; border-width: 1px">
+
+        </form>
+
+        <div id="form" style="margin-top: 10px; margin-bottom: 100px">
+            <button id="enviar" class="boton"> REGISTRAR </button>
+        </div>
+    <center>
+        <div id="Llegada" style="color: #cccccc"></div>
+    </center>
+
+    <div style="text-align: center; float: left">
+        <p style="color: #009966">
+            <a href="../index.html"><i class="fas fa-undo-alt fa-2x"></i></a><br>
+            Volver al Menu
+        </p>
+    </div>
+    <center>
+        <div>
+            <img src="../Imagenes/UFO Reports Logo 1.png" width="70" height="70" alt="Logo Disco UFO" style="margin-top: -20px; margin-left: -120px">
+        </div>
+    </center>
+    <div style="text-align: center; float: right; margin-top: -50px">
+        <p style="color: #009966">
+            <a href="RegistrarAlbum.html"><i class="far fa-arrow-alt-circle-right fa-2x"></i></a><br>
+            Registrar Album
+        </p>
+    </div>
+
+</body>
+</html>

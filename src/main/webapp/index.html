@@ -1,0 +1,164 @@
+<html>
+    <head>
+        <title>UFO Reports</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="Style/MainStyle.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        <style>
+            .Cajas{
+                border-style: solid; 
+                width: 230px; 
+                height: 150px; 
+                float: left;
+                margin-left: 5px;
+                border-color: #ccc;
+                border-radius: 5px;
+                color: #ccc;  
+                margin-bottom: 150px;
+            }
+            body{
+                font-family: "Source Sans Pro";
+                background-color: #cccccc;
+                background-image: url("Imagenes/fon7.jpg");
+            }
+            header{
+                display: block;
+            }
+            #header{
+                text-align: center;
+                padding: 6em 0 4em 0;
+            }
+            #header .avatar {
+                border-radius: 100%;
+                display: inline-block;
+                margin: 0 0 2em 0;
+                padding: 0.5em;
+                border: solid 1px rgba(255, 255, 255, 0.25);
+                background-color: rgba(255, 255, 255, 0.075);
+            }
+            span{
+                margin: 0;
+                padding: 0;
+                border: 0;
+                font-size: 100%;
+                font: inherit;
+                vertical-align: baseline;
+            }
+            #Nombre {
+                color: #ccc;
+                border-style: solid;
+                border-top-style: hidden;
+                border-left-style: hidden;
+                border-right-style: hidden;
+                border-bottom-color: #ccc;
+                width: 300px;
+                border-radius: 5px
+            }
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                padding: 12px 16px;
+                z-index: 1;
+                color: #000000;
+                margin-left: 20px;
+                margin-top: 15px;
+            }
+            
+            a{
+                color: #000000;
+            }
+            a:link {
+                text-decoration: none;
+            }
+
+            a:visited {
+                text-decoration: none;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+            a:active {
+                text-decoration: underline;
+            }
+
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#hole1").click(function () {
+                    $("#slot1").slideToggle("slow");
+                });
+            });
+
+            $(document).ready(function () {
+                $("#hole2").click(function () {
+                    $("#slot2").slideToggle("slow");
+                });
+            });
+
+            $(document).ready(function () {
+                $("#hole3").click(function () {
+                    $("#slot3").slideToggle("slow");
+                });
+            });
+        </script>
+    </head>
+
+
+    <body>
+        <header id="header">
+            <span class="avatar">
+                <img src="Imagenes/UFO Reports Logo 1.png" alt="Logo UFO Reports" width="150" height="150">
+            </span>
+
+        </header>
+
+
+    <center>
+        <div id="Nombre">
+            <p style="font-size: 25px">UFO Reports</p>
+        </div>
+    </center>
+
+    <center>
+        <div style="width: 800px; padding: 5px; margin-top: 15%; margin-left: 5%">
+
+            <div class="Cajas" id="hole1"><p style="padding-top: 25px;"> <i class="fab fa-creative-commons-sampling-plus fa-3x"></i><br> Registrar</p>
+                <div class="dropdown-content" id="slot1">
+                    <a href="Paginas/RegistrarArtista.html">Registrar Artista</a><br>
+                    <a href="Paginas/RegistrarAlbum.html">Registrar Album</a><br>
+                    <a href="Paginas/RegistrarCancion.html">Registrar Cancion</a><br>
+                </div>
+            </div>
+
+            <div class="Cajas" id="hole2"><p style="padding-top: 25px;"> <i class="fab fa-sellsy fa-3x"></i><br> Ventas</p>
+                <div class="dropdown-content"  id="slot2">
+                    <a href="Paginas/Venta.html">Registrar Ventas</a>
+                </div>
+            </div>
+
+            <div class="Cajas" id="hole3"><p style="padding-top: 25px;"> <i class="fas fa-flag-checkered fa-3x"></i><br> Reportes</p>
+                <div class="dropdown-content"  id="slot3">
+                    <a>Reporte Global</a><br>
+                    <a>Reporte Sencillos Album</a><br>
+                    <a>Reporte Sencillos Artista</a><br>
+                </div>
+            </div><br>
+
+        </div>
+        <p style="color: #cccccc; margin-top: 180px; width: 800px">Acevedo - Avila - Correa / Universidad Sergio Arboleda / Ingenieria De Software II / Danilo Castro </p>
+    </center>
+</body>
+</html>
