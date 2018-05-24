@@ -38,7 +38,7 @@ public class Admin_Reporte {
         ArrayList<Cancion> cancion = new ArrayList<>();
         try {
             //1.Establecer la consulta
-            String consulta = "INSERT INTO Reporte_global VALUES(?,?,?,?,?,?,?)";
+            String consulta = "INSERT INTO Reporte_global VALUES(?,?,?,?,?,?,?,?)";
             //2. Crear el PreparedStament
             PreparedStatement statement
                     = this.conexion.prepareStatement(consulta);
@@ -46,13 +46,13 @@ public class Admin_Reporte {
             for (int i = 0; i < reporte.getCancion().getInterprete().size(); i++) {
 
                 statement.setString(1, reporte.getCancion().getNombre());
-                //statement.setString(2, reporte.getCancion().getId());
-                statement.setString(2, reporte.getCancion().getAlbum().getTitulo());
-                statement.setString(3, reporte.getCancion().getInterprete().get(i).getNombre());
-                statement.setInt(4, reporte.getVentas());
-                statement.setInt(5, reporte.getCancion().getPuestoAnterior());
-                statement.setInt(6, reporte.getCancion().getNumeroDeListas());
-                statement.setDate(7, (Date) reporte.getFecha());
+                statement.setString(2, reporte.getCancion().getId());
+                statement.setString(3, reporte.getCancion().getAlbum().getTitulo());
+                statement.setString(4, reporte.getCancion().getInterprete().get(i).getNombre());
+                statement.setInt(5, reporte.getVentas());
+                statement.setInt(6, reporte.getCancion().getPuestoAnterior());
+                statement.setInt(7, reporte.getCancion().getNumeroDeListas());
+                statement.setDate(8, (Date) reporte.getFecha());
 
                 //--------------------------------------
                 //3. Hacer la ejecucion
@@ -101,17 +101,17 @@ public class Admin_Reporte {
                     idViejo = resultado.getString(3);
 
                     cancion.setNombre(resultado.getString(1));
-                    //cancion.setId(resultado.getString(2));
-                    album.setTitulo(resultado.getString(2));
+                    cancion.setId(resultado.getString(2));
+                    album.setTitulo(resultado.getString(3));
                     cancion.setAlbum(album);
-                    interprete.setNombre(resultado.getString(3));
+                    interprete.setNombre(resultado.getString(4));
                     arregloInterprete.add(interprete);
                     cancion.setInterprete(arregloInterprete);
-                    reporte.setVentas(resultado.getInt(4));
-                    cancion.setPuestoAnterior(resultado.getInt(5));
-                    cancion.setNumeroDeListas(resultado.getInt(6));
+                    reporte.setVentas(resultado.getInt(5));
+                    cancion.setPuestoAnterior(resultado.getInt(6));
+                    cancion.setNumeroDeListas(resultado.getInt(7));
                     reporte.setCancion(cancion);
-                    reporte.setFecha(resultado.getDate(7));
+                    reporte.setFecha(resultado.getDate(8));
 
                     respuesta.add(reporte);
                     i++;
@@ -130,7 +130,7 @@ public class Admin_Reporte {
     
     public String obtenerFechaCorteAnteriorCanciones() {
     String fecha="";
-    String consulta = "SELECT fecha_log FROM reporte_global order by Fecha_log desc";
+    String consulta = "SELECT MAX(fecha_log) FROM reporte_global order by Fecha_log desc";
         try {
             //----------------------------
             //Statement
@@ -141,15 +141,13 @@ public class Admin_Reporte {
                     = statement.executeQuery(consulta);
             //----------------------------
             //Recorrido sobre el resultado
-            int i=0;
-            while (resultado.next() || i!=1) {
+            
+            while (resultado.next()) {
+                System.out.println("IMPRIMIENDO DESDE DB: "+resultado.getString(1));
                 fecha = resultado.getDate(1).toString();
-                i++;
                 }
             
-            if (fecha==null) {
-                fecha="2015-05-11";
-            }
+           
             
             return fecha;
 

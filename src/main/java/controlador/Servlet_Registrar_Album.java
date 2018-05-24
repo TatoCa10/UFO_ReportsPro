@@ -76,25 +76,45 @@ public class Servlet_Registrar_Album extends HttpServlet {
         String ID = request.getParameter("ID");
         String titulo = request.getParameter("titulo");
         String interprete = request.getParameter("interprete");
-        String interprete2 = request.getParameter("interprete2");
-        String interprete3 = request.getParameter("interprete3");
+        String interprete2 = request.getParameter("interprete_2");
+        String interprete3 = request.getParameter("interprete_3");
+        String interprete4 = request.getParameter("interprete_4");
+        System.out.println("Interprete 4: "+interprete4);
 
         interpreteVO.setNombre(interprete);
         arregloInterprete.add(interpreteVO);
-        
-        //NO SIRVE POR EL MOMENTO
 
-//        if (!interprete2.equals("Vacio")) {
-//            interpreteVO = new Interprete();
-//            interpreteVO.setNombre(interprete2);
-//            arregloInterprete.add(interpreteVO);
-//
-//            if (!interprete3.equals("Vacio")) {
-//                interpreteVO = new Interprete();
-//                interpreteVO.setNombre(interprete3);
-//                arregloInterprete.add(interpreteVO);
-//            }
-//        }
+        //NO SIRVE POR EL MOMENTO
+        if (interprete2 != "") {
+            System.out.println(interprete2);
+            interpreteVO = new Interprete();
+            interpreteVO.setNombre(interprete2);
+            arregloInterprete.add(interpreteVO);
+
+            if (interprete3 != "") {
+                System.out.println(interprete3);
+                interpreteVO = new Interprete();
+                interpreteVO.setNombre(interprete3);
+                arregloInterprete.add(interpreteVO);
+
+                if (interprete4 != "") {
+                    System.out.println(interprete4);
+                    interpreteVO = new Interprete();
+                    interpreteVO.setNombre(interprete4);
+                    arregloInterprete.add(interpreteVO);
+                } else {
+
+                    interprete4 = "";
+                }
+            } else {
+                interprete3 = "";
+                interprete4 = "";
+            }
+        } else {
+            interprete2 = "";
+            interprete3 = "";
+            interprete4 = "";
+        }
 
         album.setTitulo(titulo);
         album.setId(ID);
@@ -104,7 +124,7 @@ public class Servlet_Registrar_Album extends HttpServlet {
 
         if (adminAlbum.crearAlbum(album)) {
 
-            String Full = "Se ha registrado el album " + titulo + " con el ID " + ID + ", Interpretada por " + interprete;
+            String Full = "Se ha registrado el album " + titulo + " con el ID " + ID + ", Interpretada por " + interprete + interprete2 + interprete3 + interprete4;
 
             JSONObject json = new JSONObject();
             System.out.println("JSON Enviado");
@@ -114,7 +134,7 @@ public class Servlet_Registrar_Album extends HttpServlet {
                 Logger.getLogger(Servlet_Registrar_Album.class.getName()).log(Level.SEVERE, null, ex);
             }
             out.print(json);
-        }else{
+        } else {
             String Full = "Error creando Album";
 
             JSONObject json = new JSONObject();
@@ -125,8 +145,7 @@ public class Servlet_Registrar_Album extends HttpServlet {
                 Logger.getLogger(Servlet_Registrar_Album.class.getName()).log(Level.SEVERE, null, ex);
             }
             out.print(json);
-        
-        
+
         }
 
     }

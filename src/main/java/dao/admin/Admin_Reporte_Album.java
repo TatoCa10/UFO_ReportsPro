@@ -71,7 +71,7 @@ public class Admin_Reporte_Album {
     public ArrayList<Reporte_Album> leerReportes(String fecha) {
         //1.Consulta
         ArrayList<Reporte_Album> respuesta = new ArrayList<>();
-        String consulta = "SELECT * FROM reporte_album WHERE fecha='" + fecha + "' order by ventas desc";
+        String consulta = "SELECT * FROM reporte_album WHERE fecha_log='" + fecha + "' order by ventas desc";
         try {
             //----------------------------
             //Statement
@@ -124,9 +124,9 @@ public class Admin_Reporte_Album {
     }
     
     
-    public String obtenerFechaCorteAnteriorAlbumes(){
+    public String obtenerFechaCorteAnteriorAlbumes() {
     String fecha="";
-    String consulta = "SELECT fecha FROM reporte_album order by Fecha desc";
+    String consulta = "SELECT MAX(fecha_log) FROM reporte_album order by Fecha_log desc";
         try {
             //----------------------------
             //Statement
@@ -137,12 +137,13 @@ public class Admin_Reporte_Album {
                     = statement.executeQuery(consulta);
             //----------------------------
             //Recorrido sobre el resultado
-            int i=0;
-            while (i!= 1) {
-                
+            
+            while (resultado.next()) {
+                System.out.println("IMPRIMIENDO DESDE DB: "+resultado.getString(1));
                 fecha = resultado.getDate(1).toString();
-                i++;
                 }
+            
+           
             
             return fecha;
 

@@ -24,10 +24,11 @@ public class Servicio_Reporte_Ventas_Album {
         ArrayList<String> fechasConfirmadas = new ArrayList<>();
         ArrayList<Reporte_Album> reporteFull = new ArrayList<>();
 
-        String fechaDeCorte = servicio.modificarFecha(fechas.get(1));
+        String fechaDeCorte = servicio.modificarFecha(fechas.get(0));
 
-        fechasConfirmadas.add(fechas.get(0));
+        fechasConfirmadas.add(fechas.get(1));
         fechasConfirmadas.add(fechaDeCorte);
+        fechasConfirmadas.add(fechas.get(0));
 
         reporteFull = adminReporteVentasAlbum.sumaReporteVentasAlbum(fechasConfirmadas);
 

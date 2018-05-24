@@ -78,18 +78,14 @@ public class Servlet_Registrar_Cancion extends HttpServlet {
         String ID = request.getParameter("ID");
         String nombre = request.getParameter("nombre");
         String album = request.getParameter("album");
-        String idAlbum = request.getParameter("idAlbum");
+        String idAlbum = request.getParameter("id_album");
         String interprete = request.getParameter("interprete");
-        String interprete2 = request.getParameter("interprete2");
-        String interprete3 = request.getParameter("interprete3");
+        
 
         interpreteVO.setNombre(interprete);
         arregloInterpretes.add(interpreteVO);
         
-        if (album==null) {
-            album="Vacio";
-            idAlbum="Vacio";
-        }
+        
         
 
         //NO SIRVE POR EL MOMENTO

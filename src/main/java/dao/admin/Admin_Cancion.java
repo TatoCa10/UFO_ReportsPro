@@ -168,15 +168,75 @@ public class Admin_Cancion {
         return respuesta;
     }
     
+    public ArrayList<Cancion> obtenerAlbumDeCancion(String cancionsinAlbum) {
+        //1.Consulta
+        ArrayList<Cancion> respuesta = new ArrayList<>();
+        String consulta = "SELECT * FROM Cancion where id= '"+cancionsinAlbum+"'";
+        try {
+            //----------------------------
+            //Statement
+            Statement statement
+                    = this.conexion.createStatement();
+            //Ejecucion
+            ResultSet resultado
+                    = statement.executeQuery(consulta);
+            //----------------------------
+            //Recorrido sobre el resultado
+            String idViejo = "";
+            int i = 0;
+            while (resultado.next()) {
+
+                if (resultado.getString(2).equals(idViejo)) {
+                    Interprete interpretes = new Interprete();
+                    interpretes.setNombre(resultado.getString(4));
+                    respuesta.get(i - 1).getInterprete().add(interpretes);
+                } else {
+
+                    ArrayList<Interprete> arregloInterprete = new ArrayList<>();
+                    Cancion cancion = new Cancion();
+                    Interprete interprete = new Interprete();
+                    Album album = new Album();
+                    idViejo = resultado.getString(2);
+
+                    cancion.setNombre(resultado.getString(1));
+                    cancion.setId(resultado.getString(2));
+                    album.setTitulo(resultado.getString(3));
+                    album.setId(resultado.getString(4));
+                    cancion.setAlbum(album);
+                    interprete.setNombre(resultado.getString(5));
+                    arregloInterprete.add(interprete);
+                    cancion.setInterprete(arregloInterprete);
+                    cancion.setPuestoAnterior(resultado.getInt(6));
+                    cancion.setNumeroDeListas(resultado.getInt(7));
+
+                    respuesta.add(cancion);
+                    i++;
+                }
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return respuesta;
+    }
+    
     public boolean modificarCancion(Cancion cancion, int numeroNuevo) {
+        
+        System.out.println("nombre: "+cancion.getNombre());
+        System.out.println("id: "+ cancion.getId());
+        System.out.println("numero nuevo"+numeroNuevo);
+        System.out.println("numero de listas: "+ cancion.getNumeroDeListas());
         boolean result = false;
-        String query = "update Cancion set puestoListaAnterior = ?, numeroDeListas = ?  where id= ?";
+        String query = "update Cancion set id = ?, puestoListaAnterior = ?, numeroDeListas = ?  where id= ?";
         PreparedStatement preparedStmt = null;
         try {
             preparedStmt = this.conexion.prepareStatement(query);
-            preparedStmt.setInt(1, numeroNuevo);
-            preparedStmt.setInt(2, cancion.getNumeroDeListas() + 1);
-            preparedStmt.setString(3, cancion.getId());
+            preparedStmt.setString(1, cancion.getId());
+            preparedStmt.setInt(2, numeroNuevo);
+            preparedStmt.setInt(3, cancion.getNumeroDeListas() + 1);
+            preparedStmt.setString(4, cancion.getId());
 
             if (preparedStmt.executeUpdate() > 0) {
                 result = true;

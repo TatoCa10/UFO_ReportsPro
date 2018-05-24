@@ -73,7 +73,7 @@ public class Admin_Reporte_Ventas_Album {
             Reporte_Album reporteVentas = new Reporte_Album();
 
             String consulta
-                    = "SELECT SUM(ventas) from Reporte_Ventas_Album where id = '" + albumes.get(i).getId() + "' and fecha between '" + fechasConfirmadas.get(0) + "' and '" + fechasConfirmadas.get(1) + "'";
+                    = "SELECT SUM(ventas) from Reporte_Ventas_Album where id = '" + albumes.get(i).getId() + "' and fecha_log between '" + fechasConfirmadas.get(0) + "' and '" + fechasConfirmadas.get(1) + "'";
             try {
                 //----------------------------
                 //Statement
@@ -90,7 +90,7 @@ public class Admin_Reporte_Ventas_Album {
 
                 if (suma != 0) {
                     reporteVentas.setAlbum(albumes.get(i));
-                    reporteVentas.setFecha(Date.valueOf(fechasConfirmadas.get(1)));
+                    reporteVentas.setFecha(Date.valueOf(fechasConfirmadas.get(2)));
                     reporteVentas.setVentas(suma);
                     reporteListo.add(reporteVentas);
 

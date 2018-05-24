@@ -5,12 +5,14 @@
  */
 package controlador;
 
+import dao.admin.Admin_Cancion;
 import dao.admin.Admin_Reporte_Por_Ventas;
 import dao.admin.Admin_Reporte_Ventas_Album;
 import dao.admin.Fecha;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
@@ -75,7 +77,7 @@ public class Servlet_Registrar_Ventas extends HttpServlet {
         //processRequest(request, response);
         response.setContentType("application/json");
 
-       // int opcion = Integer.parseInt(request.getParameter("opcion"));
+        // int opcion = Integer.parseInt(request.getParameter("opcion"));
         String name = request.getParameter("name");
         String ID = request.getParameter("ID");
         String tipo = request.getParameter("tipo");
@@ -86,171 +88,196 @@ public class Servlet_Registrar_Ventas extends HttpServlet {
         Reporte_Por_Ventas reportePorVentas = new Reporte_Por_Ventas();
         Reporte_Ventas_Album reporteporVentasAlbum = new Reporte_Ventas_Album();
         Cancion cancion = new Cancion();
+        Admin_Cancion adminCancion = new Admin_Cancion();
         Album album = new Album();
-                Fecha now = new Fecha();
-        
-        
-        int opcion = 1;
-        switch (opcion) {
-            case 1:
-                cancion= new Cancion();
+        Fecha now = new Fecha();
 
-                album.setTitulo("Vacio");
-                album.setId("Vacio");
-                cancion.setNombre(name);
-                cancion.setId(ID);
-                cancion.setAlbum(album);
+        cancion = new Cancion();
 
-                reportePorVentas.setCancion(cancion);
-                reportePorVentas.setVentas(Integer.parseInt(ventas));
-                
-                reportePorVentas.setFecha(now.obtenerFecha());
-                
-                System.out.println(now.obtenerFecha());
-                System.out.println(ventas);
+//        album.setTitulo("Vacio");
+//        album.setId("Vacio");
+        reporteporVentasAlbum = new Reporte_Ventas_Album();
+        album = new Album();
 
-                if (tipo.equals("1")) {
+        album.setTitulo(name);
+        album.setId(ID);
 
-                    if (adminReporte.crearReportePorVentasCancion(reportePorVentas)) {
+        reporteporVentasAlbum.setAlbum(album);
+        reporteporVentasAlbum.setVentas(Integer.parseInt(ventas));
+        reporteporVentasAlbum.setFecha(now.obtenerFecha());
 
-                        String Full = "Se ha registrado una venta para la cancion " + name + " con el ID " + ID + "TIPO-> " + tipo;
+        if (tipo.equals("1")) {
+            adminCancion = new Admin_Cancion();
+            ArrayList<Cancion> albumDeCancion = new ArrayList<>();
+            albumDeCancion = adminCancion.obtenerAlbumDeCancion(ID);
 
-                        JSONObject json = new JSONObject();
-                        System.out.println("JSON Enviado");
-                        try {
-                            json.put("confirmacion", Full);
-                        } catch (JSONException ex) {
-                            Logger.getLogger(Servlet_Registrar_Ventas.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+            cancion.setNombre(name);
+            cancion.setId(ID);
+            cancion.setAlbum(albumDeCancion.get(0).getAlbum());
 
-                        out.print(json);
-                    } else {
+            reportePorVentas.setCancion(cancion);
+            reportePorVentas.setVentas(Integer.parseInt(ventas));
 
-                        String Full = "Error registrando venta de cancion";
-                        JSONObject json = new JSONObject();
-                        System.out.println("JSON Enviado");
-                        try {
-                            json.put("confirmacion", Full);
-                        } catch (JSONException ex) {
-                            Logger.getLogger(Servlet_Registrar_Ventas.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+            reportePorVentas.setFecha(now.obtenerFecha());
 
-                        out.print(json);
-                    }
+            System.out.println(now.obtenerFecha());
+            System.out.println(ventas);
 
+            if (adminReporte.crearReportePorVentasCancion(reportePorVentas)) {
+
+                String Full = "Se ha registrado una venta para la cancion " + name + " con el ID " + ID + "TIPO-> " + tipo;
+
+                JSONObject json = new JSONObject();
+                System.out.println("JSON Enviado");
+                try {
+                    json.put("confirmacion", Full);
+                } catch (JSONException ex) {
+                    Logger.getLogger(Servlet_Registrar_Ventas.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                if (tipo.equals("2")) {
+                out.print(json);
+            } else {
 
-                    if (adminReporte.crearReportePorVentasCancion(reportePorVentas)) {
-                        String Full = "Se registraron " + ventas + " ventas para la cancion " + name + " con el ID " + ID + "TIPO-> " + tipo;
-
-                        JSONObject json = new JSONObject();
-                        System.out.println("JSON Enviado");
-                        try {
-                            json.put("confirmacion", Full);
-                        } catch (JSONException ex) {
-                            Logger.getLogger(Servlet_Registrar_Ventas.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
-                        out.print(json);
-
-                    } else {
-
-                        String Full = "Error registrando ventas de cancion";
-                        JSONObject json = new JSONObject();
-                        System.out.println("JSON Enviado");
-                        try {
-                            json.put("confirmacion", Full);
-                        } catch (JSONException ex) {
-                            Logger.getLogger(Servlet_Registrar_Ventas.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
-                        out.print(json);
-                    }
-
+                String Full = "Error registrando venta de cancion";
+                JSONObject json = new JSONObject();
+                System.out.println("JSON Enviado");
+                try {
+                    json.put("confirmacion", Full);
+                } catch (JSONException ex) {
+                    Logger.getLogger(Servlet_Registrar_Ventas.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                break;
+                out.print(json);
+            }
 
-            case 2:
+        }
 
-                
-                reporteporVentasAlbum = new Reporte_Ventas_Album();
-                album = new Album();
-                
+        if (tipo.equals("2")) {
 
-                album.setTitulo(name);
-                album.setId(ID);
+            adminCancion = new Admin_Cancion();
+            ArrayList<Cancion> albumDeCancion = new ArrayList<>();
+            albumDeCancion = adminCancion.obtenerAlbumDeCancion(ID);
 
-                reporteporVentasAlbum.setAlbum(album);
-                reportePorVentas.setVentas(Integer.parseInt(ventas));
-                reportePorVentas.setFecha(now.obtenerFecha());
+            cancion.setNombre(name);
+            cancion.setId(ID);
+            cancion.setAlbum(albumDeCancion.get(0).getAlbum());
 
-                
-                if (tipo.equals("1")) {
+            reportePorVentas.setCancion(cancion);
+            reportePorVentas.setVentas(Integer.parseInt(ventas));
 
-                    if (adminReporteVentasAlbum.crearReportePorVentasAlbum(reporteporVentasAlbum)) {
+            reportePorVentas.setFecha(now.obtenerFecha());
 
-                        String Full = "Se ha registrado una venta para el album " + name + " con el ID " + ID + "TIPO-> " + tipo;
+            System.out.println(now.obtenerFecha());
+            System.out.println(ventas);
 
-                        JSONObject json = new JSONObject();
-                        System.out.println("JSON Enviado");
-                        try {
-                            json.put("confirmacion", Full);
-                        } catch (JSONException ex) {
-                            Logger.getLogger(Servlet_Registrar_Ventas.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+            if (adminReporte.crearReportePorVentasCancion(reportePorVentas)) {
+                String Full = "Se registraron " + ventas + " ventas para la cancion " + name + " con el ID " + ID + "TIPO-> " + tipo;
 
-                        out.print(json);
-                    } else {
-
-                        String Full = "Error registrando venta de album";
-                        JSONObject json = new JSONObject();
-                        System.out.println("JSON Enviado");
-                        try {
-                            json.put("confirmacion", Full);
-                        } catch (JSONException ex) {
-                            Logger.getLogger(Servlet_Registrar_Ventas.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
-                        out.print(json);
-                    }
-
+                JSONObject json = new JSONObject();
+                System.out.println("JSON Enviado");
+                try {
+                    json.put("confirmacion", Full);
+                } catch (JSONException ex) {
+                    Logger.getLogger(Servlet_Registrar_Ventas.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                if (tipo.equals("2")) {
+                out.print(json);
 
-                    if (adminReporteVentasAlbum.crearReportePorVentasAlbum(reporteporVentasAlbum)) {
-                        String Full = "Se registraron " + ventas + " ventas para la cancion " + name + " con el ID " + ID + "TIPO-> " + tipo;
+            } else {
 
-                        JSONObject json = new JSONObject();
-                        System.out.println("JSON Enviado");
-                        try {
-                            json.put("confirmacion", Full);
-                        } catch (JSONException ex) {
-                            Logger.getLogger(Servlet_Registrar_Ventas.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
-                        out.print(json);
-
-                    } else {
-
-                        String Full = "Error registrando ventas de cancion";
-                        JSONObject json = new JSONObject();
-                        System.out.println("JSON Enviado");
-                        try {
-                            json.put("confirmacion", Full);
-                        } catch (JSONException ex) {
-                            Logger.getLogger(Servlet_Registrar_Ventas.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-
-                        out.print(json);
-                    }
-
+                String Full = "Error registrando ventas de cancion";
+                JSONObject json = new JSONObject();
+                System.out.println("JSON Enviado");
+                try {
+                    json.put("confirmacion", Full);
+                } catch (JSONException ex) {
+                    Logger.getLogger(Servlet_Registrar_Ventas.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                break;
+
+                out.print(json);
+            }
+
+        }
+
+        if (tipo.equals("3")) {
+
+            reporteporVentasAlbum = new Reporte_Ventas_Album();
+            album = new Album();
+
+            album.setTitulo(name);
+            album.setId(ID);
+
+            reporteporVentasAlbum.setAlbum(album);
+            reporteporVentasAlbum.setVentas(Integer.parseInt(ventas));
+            reporteporVentasAlbum.setFecha(now.obtenerFecha());
+
+            if (adminReporteVentasAlbum.crearReportePorVentasAlbum(reporteporVentasAlbum)) {
+
+                String Full = "Se ha registrado una venta para el album " + name + " con el ID " + ID + "TIPO-> " + tipo;
+
+                JSONObject json = new JSONObject();
+                System.out.println("JSON Enviado");
+                try {
+                    json.put("confirmacion", Full);
+                } catch (JSONException ex) {
+                    Logger.getLogger(Servlet_Registrar_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                out.print(json);
+            } else {
+
+                String Full = "Error registrando venta de album";
+                JSONObject json = new JSONObject();
+                System.out.println("JSON Enviado");
+                try {
+                    json.put("confirmacion", Full);
+                } catch (JSONException ex) {
+                    Logger.getLogger(Servlet_Registrar_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                out.print(json);
+            }
+
+        }
+
+        if (tipo.equals("4")) {
+
+            reporteporVentasAlbum = new Reporte_Ventas_Album();
+            album = new Album();
+
+            album.setTitulo(name);
+            album.setId(ID);
+
+            reporteporVentasAlbum.setAlbum(album);
+            reporteporVentasAlbum.setVentas(Integer.parseInt(ventas));
+            reporteporVentasAlbum.setFecha(now.obtenerFecha());
+
+            if (adminReporteVentasAlbum.crearReportePorVentasAlbum(reporteporVentasAlbum)) {
+                String Full = "Se registraron " + ventas + " ventas para la cancion " + name + " con el ID " + ID + "TIPO-> " + tipo;
+
+                JSONObject json = new JSONObject();
+                System.out.println("JSON Enviado");
+                try {
+                    json.put("confirmacion", Full);
+                } catch (JSONException ex) {
+                    Logger.getLogger(Servlet_Registrar_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                out.print(json);
+
+            } else {
+
+                String Full = "Error registrando ventas de cancion";
+                JSONObject json = new JSONObject();
+                System.out.println("JSON Enviado");
+                try {
+                    json.put("confirmacion", Full);
+                } catch (JSONException ex) {
+                    Logger.getLogger(Servlet_Registrar_Ventas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                out.print(json);
+            }
 
         }
 

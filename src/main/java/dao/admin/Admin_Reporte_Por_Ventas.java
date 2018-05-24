@@ -91,7 +91,7 @@ public class Admin_Reporte_Por_Ventas {
 
                 if (suma != 0) {
                     reporteVentas.setCancion(canciones.get(i));
-                    reporteVentas.setFecha(Date.valueOf(fechasConfirmadas.get(1)));
+                    reporteVentas.setFecha(Date.valueOf(fechasConfirmadas.get(2)));
                     reporteVentas.setVentas(suma);
                     reporteListo.add(reporteVentas);
 

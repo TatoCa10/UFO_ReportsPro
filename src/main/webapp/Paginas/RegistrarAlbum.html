@@ -33,6 +33,12 @@
                 margin: 50px auto 100px auto;
             }
 
+            #form2 {
+                position: relative;
+                width: 500px;
+                margin: 50px auto 100px auto;
+            }
+
             input {
                 font-family: "Source Sans Pro";
                 font-size: 0.875em;
@@ -127,7 +133,49 @@
                 color: #ffffff;
             }
 
+            #interprete_2{
+                display: none;
+            }
+            #interprete_3{
+                display: none;
+            }
+            #interprete_4{
+                display: none;
+            }
+            #otro_2{
+                display: none;
+            }
+            #otro_3{
+                display: none;
+            }
+            #otro_4{
+                display: none;
+            }
         </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#otro").click(function () {
+                    $("#interprete_2").css("display", "block");
+                    $("#otro_2").css("display", "block");
+                    $("#otro").css("display", "none");
+                    $("#interprete").css("border-bottom", "none");
+                });
+                $("#otro_2").click(function () {
+                    $("#interprete_3").css("display", "block");
+                    $("#otro_3").css("display", "block");
+                    $("#otro_2").css("display", "none");
+                    $("#interprete_2").css("border-bottom", "none");
+                });
+                $("#otro_3").click(function () {
+                    $("#interprete_4").css("display", "block");
+                    $("#otro_4").css("display", "block");
+                    $("#otro_3").css("display", "none");
+                    $("#interprete_3").css("border-bottom", "none");
+                });
+
+            });
+        </script>
     </head>
     <body>
         <header>Registrar Album <br></header>
@@ -136,11 +184,15 @@
 
             <input id="ID" type="text" placeholder="ID">
             <input id="titulo" type="text" placeholder="Titulo">
-            <input id="interprete" type="text" placeholder="Interprete">
-            <input id="canciones" type="text" placeholder="Canciones" style="border-bottom-style: solid; border-color: #cccccc; border-width: 1px">
+            
+            <input id="interprete" type="text" placeholder="Interprete" style="border-bottom-style: solid; border-color: #cccccc; border-width: 1px"><i class="fas fa-plus-circle" id="otro" style="margin-left: 5px; color: #cccccc"></i>
+            <input id="interprete_2" type="text" placeholder="Interprete 2" style="border-bottom-style: solid; border-color: #cccccc; border-width: 1px"><i class="fas fa-plus-circle" id="otro_2" style="margin-left: 5px; color: #cccccc"></i>
+            <input id="interprete_3" type="text" placeholder="Interprete 3" style="border-bottom-style: solid; border-color: #cccccc; border-width: 1px"><i class="fas fa-plus-circle" id="otro_3" style="margin-left: 5px; color: #cccccc"></i>
+            <input id="interprete_4" type="text" placeholder="Interprete 4" style="border-bottom-style: solid; border-color: #cccccc; border-width: 1px">
+
         </form>
 
-        <div id="form" style="margin-top: 10px; margin-bottom: 100px">
+        <div id="form2" style="margin-top: 10px; margin-bottom: 100px">
             <button id="enviar" class="boton"> REGISTRAR </button>
         </div>
     <center>

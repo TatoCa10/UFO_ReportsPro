@@ -51,7 +51,7 @@ public class Servicio_Reporte {
 
         if (generarReportes(sumaDeVentas)) {
             Servicio_Reporte_Ventas Servicio = new Servicio_Reporte_Ventas();
-            reportesOrdenados = adminReporte.leerReportes(Servicio.modificarFecha(fechas.get(0)));
+            reportesOrdenados = adminReporte.leerReportes(fechas.get(0));
             System.out.println(reportesOrdenados.size());
         }
 
@@ -60,7 +60,13 @@ public class Servicio_Reporte {
         }
 
         for (int i = 0; i < reportesOrdenados.size(); i++) {
-            adminCancion.modificarCancion(reportesOrdenados.get(i).getCancion(), i+1);
+            System.out.println("Modificando cancion: "+reportesOrdenados.get(i).getCancion().getNombre());
+            if (adminCancion.modificarCancion(reportesOrdenados.get(i).getCancion(), i+1)) {
+                System.out.println("Se Modifico cancion: "+reportesOrdenados.get(i).getCancion().getNombre());
+            }else{
+                System.out.println("No se modificó ni mierda");
+            }
+
         }
 
         return reportesOrdenados;

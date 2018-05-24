@@ -110,7 +110,7 @@ public class Admin_Album {
 
     public boolean modificarAlbum(Album album, int numeroNuevo) {
         boolean result = false;
-        String query = "update Album set puesto_Anterior = ?, numero_De_Listas = ?  where id= ?";
+        String query = "update Album set puestoListaAnterior = ?, numeroDeListas = ?  where id= ?";
         PreparedStatement preparedStmt = null;
         try {
             preparedStmt = this.conexion.prepareStatement(query);

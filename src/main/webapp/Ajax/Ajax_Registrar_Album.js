@@ -5,12 +5,15 @@ $(document).ready(function () {
         var ID = $("#ID").val();
         var titulo = $("#titulo").val();
         var interprete = $("#interprete").val();
-        var canciones = $("#canciones").val();
+        var interprete_2 = $("#interprete_2").val();
+        var interprete_3 = $("#interprete_3").val();
+        var interprete_4 = $("#interprete_4").val();
+        
         alert("Entro JS");
         $.ajax({
             url: '../Servlet_Registrar_Album',
             type: 'GET',
-            data: {ID: ID, titulo: titulo, interprete: interprete, canciones: canciones},
+            data: {ID: ID, titulo: titulo, interprete: interprete, interprete_2: interprete_2, interprete_3: interprete_3, interprete_4: interprete_4},
             dataType: 'json',
             success: function (data) {
                 console.log("DATOS CORRECTOS: " + data.confirmacion);

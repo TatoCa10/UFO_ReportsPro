@@ -214,14 +214,27 @@
                 -webkit-transition: all 0.3s ease-in-out;
                 -moz-transition: all 0.3s ease-in-out;
                 -ms-transition: all 0.3s ease-in-out;
-                
+
                 margin-left: 5px
             }
             .boton:hover{
                 background: #009966;
                 color: #cccccc;
             }
-
+            #album{
+                display: none;
+                width: 310px;
+                margin-left: 5px;
+                margin-top: 25px;
+                height: 25px
+            }
+            #id_album{
+                display: none;
+                width: 310px;
+                margin-left: 5px;
+                margin-top: 10px;
+                height: 25px
+            }
         </style>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -239,6 +252,21 @@
                     $("#Llegada").css("display", "block");
                 });
             });
+
+            $(document).ready(function () {
+                $("#Titulo").on("click", function () {
+                    $("#album").css("display", "block");
+                    $("#id_album").css("display", "block");
+                });
+            });
+
+            $(document).ready(function () {
+                $("#push").on("click", function () {
+                    $("#album").slideToggle("slow");
+                    $("#id_album").slideToggle("slow");
+                });
+            });
+
         </script>
     </head>
     <body>
@@ -256,9 +284,11 @@
                 <option value="Reporte_Canciones">Reporte Canciones</option>
                 <option value="Reporte_Albumes">Reporte Albumes</option>
                 <option value="Reporte_Cruzado">Reporte Cruzado</option>
-            </select>
+            </select><br>
+            <input type="text" id="album" placeholder="Nombre Album"><br>
+            <input type="text" id="id_album" placeholder="ID Album">
         </form>
-
+        <p id="push" style="color: #cccccc; font-style: oblique">Mas...</p>
 
         <div id="form" style="margin-top: 10px; margin-bottom: 100px">
             <button id="enviar" class="boton"> Generar Reporte </button>
@@ -363,7 +393,7 @@
     </div>
 
     <div id="Llegada2"></div>
-    
+
     <center>
         <div id="Simple">
             <p style="font-size: 15px;"><a href="../index.html">Volver Al Menu</a></p>

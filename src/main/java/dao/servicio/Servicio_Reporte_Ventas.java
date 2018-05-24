@@ -32,6 +32,7 @@ public class Servicio_Reporte_Ventas {
 
         fechasConfirmadas.add(fechas.get(1));
         fechasConfirmadas.add(fechaDeCorte);
+        fechasConfirmadas.add(fechas.get(0));
 
         reporteFull = adminReporteVentas.sumaReporteVentasCancion(fechasConfirmadas);
 

@@ -51,7 +51,7 @@
                 border-color: #ccc;
                 border-radius: 5px;
                 color: #ccc;  
-                margin-bottom: 150px;
+                margin-bottom: 20px;
             }
             #Simple{
                 margin-top: 30px;
@@ -198,6 +198,20 @@
                     $("#Caja_Masiva").slideToggle("slow");
                 });
             });
+            
+            $(document).ready(function () {
+                $("#hole3").click(function () {
+                    $("#slot3").slideToggle("slow");
+                    $("#Caja_Simple_Album").slideToggle("slow");
+                });
+            });
+            
+            $(document).ready(function () {
+                $("#hole4").click(function () {
+                    $("#slot4").slideToggle("slow");
+                    $("#Caja_Masiva_Album").slideToggle("slow");
+                });
+            });
 
         </script>
     </head>
@@ -242,14 +256,49 @@
                     </div>
                 </div>
             </div>
+
+            <div class="Cajas" id="hole3"><p style="padding-top: 25px;" id="Caja_Simple_Album"> <i class="far fa-star fa-3x"></i><br> Simple Album</p>
+                <div class="dropdown-content" id="slot3">
+                    <form id="form" class="topBefore">
+                        <p style="font-size: 25px; color: #000000">Venta Simple Album</p>
+                        <input id="name3" type="text" placeholder="Nombre Album">
+                        <input id="ID3" type="text" placeholder="ID Album" style="border-bottom-style: solid; border-color: #cccccc; border-width: 1px">
+                    </form>
+
+                    <div id="form" style="margin-top: 10px; margin-bottom: 100px">
+                        <button id="enviar3" class="boton"> REGISTRAR </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="Cajas" id="hole4"><p style="padding-top: 25px;" id="Caja_Masiva_Album"> <i class="fas fa-star fa-3x"></i><br> Masiva Album</p>
+                <div class="dropdown-content"  id="slot4">
+
+                    <form id="form" class="topBefore">
+                        <p style="font-size: 25px; color: #000000">Venta Masiva Album</p>
+                        <input id="name4" type="text" placeholder="Nombre Album">
+                        <input id="ID4" type="text" placeholder="ID Album">
+                        <input id="ventas4" type="text" placeholder="Numero Ventas" style="border-bottom-style: solid; border-color: #cccccc; border-width: 1px">
+                    </form>
+
+                    <div id="form" style="margin-top: 10px; margin-bottom: 100px">
+                        <button id="enviar4" class="boton"> REGISTRAR </button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
     </center>
 
     <center>
-        <div id="Llegada" style="color: #cccccc;"></div>
+        <div id="Llegada" style="color: #cccccc; padding-top: 70px"></div>
     </center>
-
+    <br>
     <center>
-        <div id="Simple">
+        <div id="Simple" style="margin-top: 120px">
             <p style="font-size: 15px;"><a href="../index.html">Volver Al Menu</a></p>
         </div>
     </center>
