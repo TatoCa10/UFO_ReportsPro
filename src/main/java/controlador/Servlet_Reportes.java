@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import vo.Album;
 import vo.Reporte;
 import vo.Reporte_Album;
 
@@ -78,8 +79,8 @@ public class Servlet_Reportes extends HttpServlet {
         String mes = request.getParameter("mes");
         String year = request.getParameter("year");
         String ComboIgual = request.getParameter("ComboIgual");
-
-        
+        String album =  request.getParameter("album");
+        String idalbum =  request.getParameter("id_album");
 
         System.out.println(ComboIgual);
 
@@ -148,18 +149,17 @@ public class Servlet_Reportes extends HttpServlet {
             Servicio_Reporte_Album reporte = new Servicio_Reporte_Album();
             Admin_Reporte_Album adminReporte = new Admin_Reporte_Album();
             ArrayList<Reporte_Album> arregloReporte = new ArrayList<>();
-            
+
             String fechaCorte = year + "-" + mes + "-" + dia;
             String fechaCorteAnterior = adminReporte.obtenerFechaCorteAnteriorAlbumes();
             System.out.println("Fecha de Corte: " + fechaCorte);
-            
+
             fechas.add(fechaCorte);
             fechas.add(fechaCorteAnterior);
 
             arregloReporte = reporte.obtenerReporteAlbumes(fechas);
             JSONArray array = new JSONArray();
-            
-            
+
             for (int i = 0; i < arregloReporte.size(); i++) {
 
                 System.out.println(arregloReporte.get(i).getAlbum().getTitulo());
@@ -201,7 +201,69 @@ public class Servlet_Reportes extends HttpServlet {
             }
 
             out.print(mainJson);
+
+        } else if (ComboIgual.equals("Reporte_Cruzado")) {
+
+            ArrayList<String> fechas = new ArrayList<>();
+            Servicio_Reporte reporte = new Servicio_Reporte();
+            Admin_Reporte adminReporte = new Admin_Reporte();
+            ArrayList<Reporte> arregloReporte = new ArrayList<>();
+            Album albumABuscar = new Album();
             
+            albumABuscar.setTitulo(album);
+            albumABuscar.setId(idalbum);
+
+            String fechaCorte = year + "-" + mes + "-" + dia;
+            String fechaCorteAnterior = adminReporte.obtenerFechaCorteAnteriorCancionesAlbum();
+            System.out.println("Fecha de Corte: " + fechaCorte);
+
+            fechas.add(fechaCorte);
+            fechas.add(fechaCorteAnterior);
+            
+            arregloReporte = reporte.obtenerReporteCancionesDeAlbum(fechas, albumABuscar);
+            JSONArray array = new JSONArray();
+            
+            for (int i = 0; i < arregloReporte.size(); i++) {
+
+                System.out.println(arregloReporte.get(i).getCancion().getNombre());
+
+            }
+
+            for (int i = 0; i < arregloReporte.size(); i++) {
+                System.out.println("JSON Enviado");
+
+                try {
+                    for (int j = 0; j < arregloReporte.get(i).getCancion().getInterprete().size(); j++) {
+
+                        JSONObject json = new JSONObject();
+                        json.put("puesto", i + 1);
+                        json.put("nombre", arregloReporte.get(i).getCancion().getNombre());
+                        json.put("interprete", arregloReporte.get(i).getCancion().getInterprete().get(j).getNombre());
+                        json.put("ventas", arregloReporte.get(i).getVentas());
+                        json.put("anterior", arregloReporte.get(i).getCancion().getPuestoAnterior());
+                        json.put("v_anterior", arregloReporte.get(i).getCancion().getNumeroDeListas());
+
+                        array.put(json);
+                    }
+
+                } catch (JSONException ex) {
+                    Logger.getLogger(Servlet_Reportes.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
+            String Full = "Se genero el reporte " + ComboIgual + " en el periodo " + dia + "/" + mes + "/" + year;
+
+            JSONObject mainJson = new JSONObject();
+            {
+                try {
+                    mainJson.put("Reportes", array);
+                } catch (JSONException ex) {
+                    Logger.getLogger(Servlet_Reportes.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            out.print(mainJson);
 
         }
 

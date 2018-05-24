@@ -115,10 +115,10 @@ public class Admin_Cancion {
         return respuesta;
     }
 
-    public ArrayList<Cancion> leerCancionesDeAlbum(Album album) {
+    public ArrayList<Cancion> leerCancionesDeAlbum(Album albumPro) {
         //1.Consulta
         ArrayList<Cancion> respuesta = new ArrayList<>();
-        String consulta = "SELECT * FROM Cancion where album = '"+album.getTitulo()+"'";
+        String consulta = "SELECT * FROM Cancion where idAlbum ='"+albumPro.getId()+"'";
         try {
             //----------------------------
             //Statement
@@ -142,18 +142,19 @@ public class Admin_Cancion {
                     ArrayList<Interprete> arregloInterprete = new ArrayList<>();
                     Cancion cancion = new Cancion();
                     Interprete interprete = new Interprete();
-                    Album albumito = new Album();
+                    Album album = new Album();
                     idViejo = resultado.getString(2);
 
                     cancion.setNombre(resultado.getString(1));
                     cancion.setId(resultado.getString(2));
-                    albumito.setTitulo(resultado.getString(3));
-                    cancion.setAlbum(albumito);
-                    interprete.setNombre(resultado.getString(4));
+                    album.setTitulo(resultado.getString(3));
+                    album.setId(resultado.getString(4));
+                    cancion.setAlbum(album);
+                    interprete.setNombre(resultado.getString(5));
                     arregloInterprete.add(interprete);
                     cancion.setInterprete(arregloInterprete);
-                    cancion.setPuestoAnterior(resultado.getInt(5));
-                    cancion.setNumeroDeListas(resultado.getInt(6));
+                    cancion.setPuestoAnterior(resultado.getInt(6));
+                    cancion.setNumeroDeListas(resultado.getInt(7));
 
                     respuesta.add(cancion);
                     i++;

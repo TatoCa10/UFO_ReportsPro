@@ -34,6 +34,22 @@ public class Servicio_Reporte {
         return false;
 
     }
+    
+    public boolean generarReportesCancionesAlbum(ArrayList<Reporte> reporte) {
+        adminReporte = new Admin_Reporte();
+
+        for (int i = 0; i < reporte.size(); i++) {
+            System.out.println("Creando Reportes...");
+            adminReporte.crearReporteCancionesAlbum(reporte.get(i));
+            if (i == reporte.size() - 1) {
+
+                return true;
+
+            }
+        }
+        return false;
+
+    }
 
     public ArrayList<Reporte> obtenerReporteCanciones(ArrayList<String> fechas) {
 
@@ -50,7 +66,7 @@ public class Servicio_Reporte {
         sumaDeVentas = SReporteVentas.ObtenerSumaDeVentasPorReporte(fechas);
 
         if (generarReportes(sumaDeVentas)) {
-            Servicio_Reporte_Ventas Servicio = new Servicio_Reporte_Ventas();
+            
             reportesOrdenados = adminReporte.leerReportes(fechas.get(0));
             System.out.println(reportesOrdenados.size());
         }
@@ -79,15 +95,32 @@ public class Servicio_Reporte {
         ArrayList<Reporte> reportesOrdenados = new ArrayList<>();
         adminReporte = new Admin_Reporte();
         Admin_Cancion adminCancion = new Admin_Cancion();
+        
+        System.out.println("Metodo obtenerReporteCancionesAlbum");
 
         sumaDeVentas = SReporteVentas.ObtenerSumaDeVentasCancionesDeAlbum(fechas, album);
-        generarReportes(sumaDeVentas);
-
-        reportesOrdenados = adminReporte.leerReportes(sumaDeVentas.get(0).getFecha().toString());
+        
+        
+        if (generarReportesCancionesAlbum(sumaDeVentas)) {
+            
+            reportesOrdenados = adminReporte.leerReportesCancionesAlbum(fechas.get(0));
+            System.out.println(reportesOrdenados.size());
+        }
 
         for (int i = 0; i < reportesOrdenados.size(); i++) {
-            adminCancion.modificarCancion(reportesOrdenados.get(i).getCancion(), i);
+            System.out.println(reportesOrdenados.get(i).getCancion().getNombre());
         }
+
+        for (int i = 0; i < reportesOrdenados.size(); i++) {
+            System.out.println("Modificando cancion: "+reportesOrdenados.get(i).getCancion().getNombre());
+            if (adminCancion.modificarCancion(reportesOrdenados.get(i).getCancion(), i+1)) {
+                System.out.println("Se Modifico cancion: "+reportesOrdenados.get(i).getCancion().getNombre());
+            }else{
+                System.out.println("No se modificó ni mierda");
+            }
+
+        }
+
 
         return reportesOrdenados;
     }
