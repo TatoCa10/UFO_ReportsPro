@@ -94,12 +94,13 @@ public class Admin_Cancion {
                     cancion.setNombre(resultado.getString(1));
                     cancion.setId(resultado.getString(2));
                     album.setTitulo(resultado.getString(3));
+                    album.setId(resultado.getString(4));
                     cancion.setAlbum(album);
-                    interprete.setNombre(resultado.getString(4));
+                    interprete.setNombre(resultado.getString(5));
                     arregloInterprete.add(interprete);
                     cancion.setInterprete(arregloInterprete);
-                    cancion.setPuestoAnterior(resultado.getInt(5));
-                    cancion.setNumeroDeListas(resultado.getInt(6));
+                    cancion.setPuestoAnterior(resultado.getInt(6));
+                    cancion.setNumeroDeListas(resultado.getInt(7));
 
                     respuesta.add(cancion);
                     i++;
@@ -169,7 +170,7 @@ public class Admin_Cancion {
     
     public boolean modificarCancion(Cancion cancion, int numeroNuevo) {
         boolean result = false;
-        String query = "update Cancion set puesto_Anterior = ?, numero_De_Listas = ?  where id= ?";
+        String query = "update Cancion set puestoListaAnterior = ?, numeroDeListas = ?  where id= ?";
         PreparedStatement preparedStmt = null;
         try {
             preparedStmt = this.conexion.prepareStatement(query);

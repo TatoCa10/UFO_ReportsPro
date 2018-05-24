@@ -74,7 +74,7 @@ public class Admin_Reporte_Por_Ventas {
             Reporte reporteVentas = new Reporte();
 
             String consulta
-                    = "SELECT SUM(ventas) from Reporte_Ventas where id = '" + canciones.get(i).getId() + "' and fecha between '" + fechasConfirmadas.get(0) + "' and '" + fechasConfirmadas.get(1) + "'";
+                    = "SELECT SUM(ventas) from Reporte_Ventas where id = '" + canciones.get(i).getId() + "' and fecha_log between '" + fechasConfirmadas.get(0) + "' and '" + fechasConfirmadas.get(1) + "'";
             try {
                 //----------------------------
                 //Statement

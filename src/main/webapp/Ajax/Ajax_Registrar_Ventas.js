@@ -4,12 +4,13 @@ $(document).ready(function () {
     $("#enviar").click(function () {
         var name = $("#name").val();
         var ID = $("#ID").val();
+        var ventas = 1;
         var tipo = 1;
 
         $.ajax({
             url: '../Servlet_Registrar_Ventas',
             type: 'GET',
-            data: {name: name, ID: ID, tipo: tipo},
+            data: {name: name, ID: ID, ventas: ventas, tipo: tipo},
             dataType: 'json',
             success: function (data) {
                 console.log("DATOS CORRECTOS: " + data.confirmacion);

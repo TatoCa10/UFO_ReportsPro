@@ -28,9 +28,9 @@ public class Servicio_Reporte_Ventas {
         ArrayList<String> fechasConfirmadas = new ArrayList<>();
         ArrayList<Reporte> reporteFull = new ArrayList<>();
 
-        String fechaDeCorte = modificarFecha(fechas.get(1));
+        String fechaDeCorte = modificarFecha(fechas.get(0));
 
-        fechasConfirmadas.add(fechas.get(0));
+        fechasConfirmadas.add(fechas.get(1));
         fechasConfirmadas.add(fechaDeCorte);
 
         reporteFull = adminReporteVentas.sumaReporteVentasCancion(fechasConfirmadas);

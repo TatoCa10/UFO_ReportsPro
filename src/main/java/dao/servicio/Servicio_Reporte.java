@@ -19,12 +19,19 @@ public class Servicio_Reporte {
 
     private Admin_Reporte adminReporte;
 
-    public void generarReportes(ArrayList<Reporte> reporte) {
+    public boolean generarReportes(ArrayList<Reporte> reporte) {
         adminReporte = new Admin_Reporte();
 
         for (int i = 0; i < reporte.size(); i++) {
+            System.out.println("Creando Reportes...");
             adminReporte.crearReporte(reporte.get(i));
+            if (i == reporte.size() - 1) {
+
+                return true;
+
+            }
         }
+        return false;
 
     }
 
@@ -36,18 +43,29 @@ public class Servicio_Reporte {
         adminReporte = new Admin_Reporte();
         Admin_Cancion adminCancion = new Admin_Cancion();
 
-        sumaDeVentas = SReporteVentas.ObtenerSumaDeVentasPorReporte(fechas);
-        generarReportes(sumaDeVentas);
+        for (int i = 0; i < fechas.size(); i++) {
+            System.out.println(fechas.get(i));
+        }
 
-        reportesOrdenados = adminReporte.leerReportes(sumaDeVentas.get(0).getFecha().toString());
+        sumaDeVentas = SReporteVentas.ObtenerSumaDeVentasPorReporte(fechas);
+
+        if (generarReportes(sumaDeVentas)) {
+            Servicio_Reporte_Ventas Servicio = new Servicio_Reporte_Ventas();
+            reportesOrdenados = adminReporte.leerReportes(Servicio.modificarFecha(fechas.get(0)));
+            System.out.println(reportesOrdenados.size());
+        }
 
         for (int i = 0; i < reportesOrdenados.size(); i++) {
-            adminCancion.modificarCancion(reportesOrdenados.get(i).getCancion(), i);
+            System.out.println(reportesOrdenados.get(i).getCancion().getNombre());
+        }
+
+        for (int i = 0; i < reportesOrdenados.size(); i++) {
+            adminCancion.modificarCancion(reportesOrdenados.get(i).getCancion(), i+1);
         }
 
         return reportesOrdenados;
     }
-    
+
     public ArrayList<Reporte> obtenerReporteCancionesDeAlbum(ArrayList<String> fechas, Album album) {
 
         Servicio_Reporte_Ventas SReporteVentas = new Servicio_Reporte_Ventas();

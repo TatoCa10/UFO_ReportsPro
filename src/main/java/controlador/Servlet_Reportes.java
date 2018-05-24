@@ -77,10 +77,12 @@ public class Servlet_Reportes extends HttpServlet {
         String ComboIgual = request.getParameter("ComboIgual");
 
         ArrayList<String> fechas = new ArrayList<>();
+        
+        System.out.println(ComboIgual);
 
-        switch (ComboIgual) {
+        if(ComboIgual.equals("Reporte_Canciones")){
 
-            case "Reporte Cancion":
+           
 
                 Servicio_Reporte reporte = new Servicio_Reporte();
                 Admin_Reporte adminReporte = new Admin_Reporte();
@@ -88,12 +90,19 @@ public class Servlet_Reportes extends HttpServlet {
 
                 String fechaCorte = year + "-" + mes + "-" + dia;
                 String fechaCorteAnterior = adminReporte.obtenerFechaCorteAnteriorCanciones();
+                System.out.println("Fecha anterior: "+ fechaCorte);
 
                 fechas.add(fechaCorte);
                 fechas.add(fechaCorteAnterior);
 
                 arregloReporte = reporte.obtenerReporteCanciones(fechas);
                 JSONArray array = new JSONArray();
+                
+                for (int i = 0; i < arregloReporte.size(); i++) {
+                
+                    System.out.println(arregloReporte.get(i).getCancion().getNombre());
+                    
+            }
 
                 for (int i = 0; i < arregloReporte.size(); i++) {
                     System.out.println("JSON Enviado");
@@ -102,9 +111,9 @@ public class Servlet_Reportes extends HttpServlet {
                         for (int j = 0; j < arregloReporte.get(i).getCancion().getInterprete().size(); j++) {
 
                             JSONObject json = new JSONObject();
-                            json.put("puesto", i);
+                            json.put("puesto", i+1);
                             json.put("nombre", arregloReporte.get(i).getCancion().getNombre());
-                            json.put("interprete", arregloReporte.get(i).getInterprete().get(j).getNombre());
+                            json.put("interprete", arregloReporte.get(i).getCancion().getInterprete().get(j).getNombre());
                             json.put("ventas", arregloReporte.get(i).getVentas());
                             json.put("anterior", arregloReporte.get(i).getCancion().getPuestoAnterior());
                             json.put("v_anterior", arregloReporte.get(i).getCancion().getNumeroDeListas());
@@ -131,7 +140,7 @@ public class Servlet_Reportes extends HttpServlet {
 
                 
                 out.print(mainJson);
-                break;
+                
 
         }
 

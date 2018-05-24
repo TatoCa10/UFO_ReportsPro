@@ -16,11 +16,17 @@ $(document).ready(function () {
             data: {dia: dia, mes: mes, year: year, ComboIgual: ComboIgual.value},
             dataType: 'json',
             success: function (data) {
-                console.log("DATOS CORRECTOS: " + data.confirmacion);
+                //console.log("DATOS CORRECTOS: " + data.confirmacion);
                 alert("Se genero el reporte " + ComboIgual.value + " en el periodo " + dia + "/" + mes + "/" + year);
-                $("#Llegada").css("display", "block");
-                $("#Tabla").append("<tr><td>"+ data.puesto +"</td><td>" + data.nombre +"</td><td>" + data.interprete +"</td><td>"+ data.ventas +"</td><td>"+ data.anterior +"</td><td>"+ data.anterior + "</td></tr>");
-                $("#Llegada2").html("(<center><p style='color: #cccccc'>" + data.confirmacion + "</p></center><br>");
+
+                for (var i = 0; i < data.Reportes.length; i++) {
+
+
+                    $("#Llegada").css("display", "block");
+                    $("#Tabla").append("<tr><td>" + data.Reportes[i].puesto + "</td><td>" + data.Reportes[i].nombre + "</td><td>" + data.Reportes[i].interprete + "</td><td>" + data.Reportes[i].ventas + "</td><td>" + data.Reportes[i].anterior + "</td><td>" + data.Reportes[i].v_anterior + "</td></tr>");
+                    $("#Llegada2").html("(<center><p style='color: #cccccc'>" + data.confirmacion + "</p></center><br>");
+
+                }
             },
             error: function () {
                 alert("Error");
