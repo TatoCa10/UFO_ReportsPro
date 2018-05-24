@@ -85,7 +85,10 @@ public class Servlet_Registrar_Cancion extends HttpServlet {
         interpreteVO.setNombre(interprete);
         arregloInterpretes.add(interpreteVO);
         
-        
+        if (album.equals("")) {
+            album ="Sin Album";
+            idAlbum ="Sin Album";
+        }
         
 
         //NO SIRVE POR EL MOMENTO
