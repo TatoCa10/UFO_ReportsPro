@@ -22,21 +22,7 @@ public class FechaTest {
     public FechaTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
     
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
 
     /**
      * Test of obtenerFecha method, of class Fecha.
@@ -45,11 +31,15 @@ public class FechaTest {
     public void testObtenerFecha() {
         System.out.println("obtenerFecha");
         Fecha instance = new Fecha();
-        Date expResult = null;
+        String fecha="2018-05-24";
+        
+        
+        Date expResult = java.sql.Date.valueOf(fecha);
         Date result = instance.obtenerFecha();
+        
+        
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
     
 }

@@ -5,6 +5,7 @@
  */
 package dao.admin;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -12,6 +13,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import vo.Album;
+import vo.Interprete;
 import vo.Reporte_Album;
 
 /**
@@ -45,29 +48,51 @@ public class Admin_Reporte_AlbumTest {
     @Test
     public void testCrearReporte() {
         System.out.println("crearReporte");
-        Reporte_Album reporte = null;
+        Reporte_Album reporte = new Reporte_Album();
         Admin_Reporte_Album instance = new Admin_Reporte_Album();
-        boolean expResult = false;
+        Album album = new Album();
+        Interprete interprete = new Interprete();
+        ArrayList<Interprete> arreglo = new ArrayList<>();
+        
+        String fecha = "2018-05-24";
+        
+        interprete.setNombre("INTER_TEST");
+        arreglo.add(interprete);
+        
+        album.setTitulo("ALBUM_PRUEBA");
+        album.setId("200");
+        album.setInterprete(arreglo);
+        album.setPuestoAnterior(0);
+        album.setNumeroDeListas(0);
+        
+        
+        reporte.setAlbum(album);
+        reporte.setFecha(Date.valueOf(fecha));
+        reporte.setVentas(100);
+        
+        
+        boolean expResult = true;
         boolean result = instance.crearReporte(reporte);
+        
+        
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
      * Test of leerReportes method, of class Admin_Reporte_Album.
      */
-    @Test
-    public void testLeerReportes() {
-        System.out.println("leerReportes");
-        String fecha = "";
-        Admin_Reporte_Album instance = new Admin_Reporte_Album();
-        ArrayList<Reporte_Album> expResult = null;
-        ArrayList<Reporte_Album> result = instance.leerReportes(fecha);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    @Test
+//    public void testLeerReportes() {
+//        System.out.println("leerReportes");
+//        String fecha = "";
+//        Admin_Reporte_Album instance = new Admin_Reporte_Album();
+//        ArrayList<Reporte_Album> expResult = null;
+//        ArrayList<Reporte_Album> result = instance.leerReportes(fecha);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
 
     /**
      * Test of obtenerFechaCorteAnteriorAlbumes method, of class Admin_Reporte_Album.
@@ -76,11 +101,14 @@ public class Admin_Reporte_AlbumTest {
     public void testObtenerFechaCorteAnteriorAlbumes() {
         System.out.println("obtenerFechaCorteAnteriorAlbumes");
         Admin_Reporte_Album instance = new Admin_Reporte_Album();
-        String expResult = "";
+        
+        
+        String expResult = "2018-05-30";
         String result = instance.obtenerFechaCorteAnteriorAlbumes();
+        
+        
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
     
 }

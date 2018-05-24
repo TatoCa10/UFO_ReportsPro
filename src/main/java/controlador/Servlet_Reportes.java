@@ -94,6 +94,8 @@ public class Servlet_Reportes extends HttpServlet {
             String fechaCorte = year + "-" + mes + "-" + dia;
             String fechaCorteAnterior = adminReporte.obtenerFechaCorteAnteriorCanciones();
             System.out.println("Fecha de Corte: " + fechaCorte);
+            
+            
 
             fechas.add(fechaCorte);
             fechas.add(fechaCorteAnterior);
